@@ -1,3 +1,21 @@
+## Diagrams
+
+This project includes a diagrams/ folder containing:
+
+1. <a href="https://github.com/MayyarShanwar/first-project/tree/master/diagrams/ERD" target="_blank">ERD (Entity Relationship Diagram):</a> Visualizes the database schema and relationships.
+
+2. <a href="https://github.com/MayyarShanwar/first-project/tree/master/diagrams/Class%20Diagram" target="_blank">Class Diagram: </a>Illustrates the structure and relationships of the application's classes.
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -108,11 +126,3 @@ php artisan migrate
 -   Comment Model:
     Variables: content, post_id
     Relationships: belongs to Post
-
-## Diagrams
-
-This project includes a diagrams/ folder containing:
-
-ERD (Entity Relationship Diagram): Visualizes the database schema and relationships.
-
-Class Diagram: Illustrates the structure and relationships of the application's classes.
