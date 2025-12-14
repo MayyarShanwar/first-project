@@ -2,9 +2,9 @@
 
 This project includes a diagrams/ folder containing:
 
-1. <a href="https://github.com/MayyarShanwar/first-project/tree/master/diagrams/ERD" target="_blank">ERD (Entity Relationship Diagram):</a> Visualizes the database schema and relationships.
+1. <a href="https://github.com/MayyarShanwar/first-project/tree/master/diagrams/ERD">ERD (Entity Relationship Diagram):</a> Visualizes the database schema and relationships.
 
-2. <a href="https://github.com/MayyarShanwar/first-project/tree/master/diagrams/Class%20Diagram" target="_blank">Class Diagram: </a>Illustrates the structure and relationships of the application's classes.
+2. <a href="https://github.com/MayyarShanwar/first-project/tree/master/diagrams/Class%20Diagram">Class Diagram: </a>Illustrates the structure and relationships of the application's classes.
 
 
 <br />
