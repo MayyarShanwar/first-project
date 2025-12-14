@@ -11,13 +11,13 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -33,14 +33,14 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+-   **[Vehikl](https://vehikl.com)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Redberry](https://redberry.international/laravel-development)**
+-   **[Active Logic](https://activelogic.com)**
 
 ## Contributing
 
@@ -57,3 +57,62 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## First Project
+
+A Laravel-based web application demonstrating a blog-like structure with authors, posts, categories, and comments. This project is structured to showcase Laravel's MVC architecture and Eloquent ORM capabilities.
+
+## Features
+
+Author, Post, Category, and Comment models
+
+Eloquent relationships among models
+
+ERD and Class Diagram included
+
+## Requirements
+
+PHP >= 8.1
+
+Composer
+
+Laravel 10.x
+
+MySQL
+
+## Installation
+
+Open the cmd and write the following commands:
+
+git clone https://github.com/MayyarShanwar/first-project.git
+cd first-project
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+
+## Models and Relationships
+
+-   Author Model:
+    Variables: name, email
+    Relationships: has many Posts
+
+-   Post Model:
+    Variables: title, content, author_id, category_id
+    Relationships: belongs to Author, belongs to Category, has many Comments
+
+-   Category Model:
+    Variables: name
+    Relationships: has many Posts
+
+-   Comment Model:
+    Variables: content, post_id
+    Relationships: belongs to Post
+
+## Diagrams
+
+This project includes a diagrams/ folder containing:
+
+ERD (Entity Relationship Diagram): Visualizes the database schema and relationships.
+
+Class Diagram: Illustrates the structure and relationships of the application's classes.
