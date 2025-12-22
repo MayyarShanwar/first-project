@@ -35,9 +35,9 @@ class CategoryController extends Controller
     /**
      * Display the specified category.
      */
-    public function show(Request $request)
+    public function show(Category $category)
     {
-        $category = Category::find(request('category'));
+        $category = Category::find($category->id);
         return response()->json(['category' => $category]);
     }
 
@@ -50,7 +50,7 @@ class CategoryController extends Controller
             'name' => ['required', 'min:3']
         ]);
 
-        $category = Category::find(request('category'));
+        $category = Category::find($category->id);
 
         $category->update([
             'name' => $request->name,
@@ -64,7 +64,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        Category::find(request('category'))->delete();
+        Category::find($category->id)->delete();
         return response(200);
     }
 }

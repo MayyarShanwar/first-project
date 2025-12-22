@@ -38,7 +38,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post = Post::find(request('post'));
+        $post = Post::find($post->id);
         return response()->json(['post' => $post]);
     }
 
@@ -54,7 +54,7 @@ class PostController extends Controller
             'category_id' => ['required'],
         ]);
 
-        $post = Post::find(request('post'));
+        $post = Post::find($post->id);
 
         $post->update([
             'name' => $request->name,
@@ -72,7 +72,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Post::find(request('post'))->delete();
+        Post::find($post->id)->delete();
         return response(200);
     }
 }
