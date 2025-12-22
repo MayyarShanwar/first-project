@@ -73,6 +73,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         Post::find($post->id)->delete();
-        return response(200);
+        return response()->json(['messsage' => 'Post deleted successfully']);
     }
 }
