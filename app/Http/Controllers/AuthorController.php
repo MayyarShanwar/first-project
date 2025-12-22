@@ -12,7 +12,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::with('posts')->get();
         return response()->json(['messsage: ' => 'Done successfully', 'authors' => $authors]);
     }
 

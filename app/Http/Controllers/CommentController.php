@@ -12,15 +12,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new comment.
-     */
-    public function create()
-    {
-        //
+        $comments = Comment::all();
+        return response()->json(['messsage: ' => 'Done successfully', 'comments' => $comments]);
     }
 
     /**
@@ -28,7 +21,14 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = $request->validate([
+            'content' => ['required'],
+            'post_id' => ['required'],
+        ]);
+
+        Comment::create($comment);
+
+        return response()->json(['message: ' => 'comment added successfully']);
     }
 
     /**
@@ -36,15 +36,8 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified comment.
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        $comment = Comment::find($comment->id);
+        return response()->json(['comment' => $comment]);
     }
 
     /**
@@ -52,7 +45,19 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $request->validate([
+            'content' => ['required', 'min:3'],
+            'post_id' => ['required']
+        ]);
+
+        $comment = Comment::find($comment->id);
+
+        $comment->update([
+            'content' => $request->content,
+            'post_id' => $request->post_id,
+        ]);
+
+        return response()->json(['message: ' => 'comment updated successfully']);
     }
 
     /**
@@ -60,6 +65,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        Comment::find($comment->id)->delete();
+        return response()->json(['message' => 'comment deleted successfully']);
     }
 }

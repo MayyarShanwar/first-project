@@ -12,7 +12,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('comments')->get();
         return response()->json(['messsage: ' => 'Done successfully', 'posts' => $posts]);
     }
 
