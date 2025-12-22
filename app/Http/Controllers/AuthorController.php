@@ -12,15 +12,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new author.
-     */
-    public function create()
-    {
-        //
+        $authors = Author::all();
+        return response()->json(['messsage: ' => 'Done successfully', 'authors' => $authors]);
     }
 
     /**
@@ -28,7 +21,14 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $author = $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email']
+        ]);
+
+        Author::create($author);
+
+        return response()->json(['message: ' => 'author added successfully']);
     }
 
     /**
@@ -36,15 +36,8 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified author.
-     */
-    public function edit(Author $author)
-    {
-        //
+        $author = Author::find($author->id);
+        return response()->json(['author' => $author]);
     }
 
     /**
@@ -52,7 +45,19 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email']
+        ]);
+
+        $author = Author::find($author->id);
+
+        $author->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return response()->json(['message: ' => 'author updated successfully']);
     }
 
     /**
@@ -60,6 +65,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        Author::find($author->id)->delete();
+        return response()->json(['message' => 'author deleted successfully']);
     }
 }
