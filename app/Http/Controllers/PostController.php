@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -19,16 +20,10 @@ class PostController extends Controller
     /**
      * Store a newly created post in storage.
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        $post = $request->validate([
-            'title' => ['required', 'min:3'],
-            'content' => ['required'],
-            'author_id' => ['required'],
-            'category_id' => ['required'],
-        ]);
 
-        Post::create($post);
+        Post::create($request->all());
 
         return response()->json(['message: ' => 'post added successfully']);
     }
@@ -44,22 +39,11 @@ class PostController extends Controller
     /**
      * Update the specified post in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PostStoreRequest $request, Post $post)
     {
-        $request->validate([
-            'title' => ['required', 'min:3'],
-            'content' => ['required'],
-            'author_id' => ['required'],
-            'category_id' => ['required'],
-        ]);
+        $validated = $request->validated();
 
-        $post->update([
-            'name' => $request->name,
-            'content' => $request->content,
-            'published_at' => $request->published_at,
-            'author_id' => $request->author_id,
-            'category_id' => $request->category_id,
-        ]);
+        $post->update($validated);
 
         return response()->json(['message: ' => 'post updated successfully']);
     }

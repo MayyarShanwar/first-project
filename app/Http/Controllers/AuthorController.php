@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthorStoreRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,10 @@ class AuthorController extends Controller
     /**
      * Store a newly created author in storage.
      */
-    public function store(Request $request)
+    public function store(AuthorStoreRequest $request)
     {
-        $author = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email']
-        ]);
 
-        Author::create($author);
+        Author::create($request->all());
 
         return response()->json(['message: ' => 'author added successfully']);
     }
@@ -42,17 +39,11 @@ class AuthorController extends Controller
     /**
      * Update the specified author in storage.
      */
-    public function update(Request $request, Author $author)
+    public function update(AuthorStoreRequest $request, Author $author)
     {
-        $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email']
-        ]);
+        $validated = $request->validated();
 
-        $author->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        $author->update($validated);
 
         return response()->json(['message: ' => 'author updated successfully']);
     }

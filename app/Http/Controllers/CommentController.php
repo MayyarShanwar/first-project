@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentStoreRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,9 @@ class CommentController extends Controller
     /**
      * Store a newly created comment in storage.
      */
-    public function store(Request $request)
+    public function store(CommentStoreRequest $request)
     {
-        $comment = $request->validate([
-            'content' => ['required'],
-            'post_id' => ['required'],
-        ]);
-
-        Comment::create($comment);
+        Comment::create($request->all());
 
         return response()->json(['message: ' => 'comment added successfully']);
     }
@@ -42,17 +38,11 @@ class CommentController extends Controller
     /**
      * Update the specified comment in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentStoreRequest $request, Comment $comment)
     {
-        $request->validate([
-            'content' => ['required', 'min:3'],
-            'post_id' => ['required']
-        ]);
+        $validated = $request->validated();
 
-        $comment->update([
-            'content' => $request->content,
-            'post_id' => $request->post_id,
-        ]);
+        $comment->update($validated);
 
         return response()->json(['message: ' => 'comment updated successfully']);
     }

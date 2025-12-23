@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Laravel\Prompts\Output\ConsoleOutput;
@@ -20,13 +21,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created category in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        $category = $request->validate([
-            'name' => ['required', 'min:3']
-        ]);
 
-        Category::create($category);
+        Category::create($request->all());
 
         return response()->json(['message: ' => 'category added successfully']);
 
@@ -43,15 +41,11 @@ class CategoryController extends Controller
     /**
      * Update the specified category in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryStoreRequest $request, Category $category)
     {
-        $request->validate([
-            'name' => ['required', 'min:3']
-        ]);
+        $validated = $request->validated();
 
-        $category->update([
-            'name' => $request->name,
-        ]);
+        $category->update($validated);
 
         return response()->json(['message: ' => 'category updated successfully']);
     }
