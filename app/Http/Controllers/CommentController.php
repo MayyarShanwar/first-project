@@ -36,7 +36,6 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        $comment = Comment::find($comment->id);
         return response()->json(['comment' => $comment]);
     }
 
@@ -49,8 +48,6 @@ class CommentController extends Controller
             'content' => ['required', 'min:3'],
             'post_id' => ['required']
         ]);
-
-        $comment = Comment::find($comment->id);
 
         $comment->update([
             'content' => $request->content,
@@ -65,7 +62,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        Comment::find($comment->id)->delete();
+        $comment->delete();
         return response()->json(['message' => 'comment deleted successfully']);
     }
 }

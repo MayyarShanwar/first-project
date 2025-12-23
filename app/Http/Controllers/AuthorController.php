@@ -36,7 +36,6 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        $author = Author::find($author->id);
         return response()->json(['author' => $author]);
     }
 
@@ -49,8 +48,6 @@ class AuthorController extends Controller
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email']
         ]);
-
-        $author = Author::find($author->id);
 
         $author->update([
             'name' => $request->name,
@@ -65,7 +62,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        Author::find($author->id)->delete();
+        $author->delete();
         return response()->json(['message' => 'author deleted successfully']);
     }
 }

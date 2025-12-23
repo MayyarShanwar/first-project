@@ -38,7 +38,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post = Post::find($post->id);
         return response()->json(['post' => $post]);
     }
 
@@ -53,8 +52,6 @@ class PostController extends Controller
             'author_id' => ['required'],
             'category_id' => ['required'],
         ]);
-
-        $post = Post::find($post->id);
 
         $post->update([
             'name' => $request->name,
@@ -72,7 +69,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Post::find($post->id)->delete();
+        $post->delete();
         return response()->json(['messsage' => 'Post deleted successfully']);
     }
 }

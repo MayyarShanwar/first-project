@@ -37,7 +37,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category = Category::find($category->id);
         return response()->json(['category' => $category]);
     }
 
@@ -49,8 +48,6 @@ class CategoryController extends Controller
         $request->validate([
             'name' => ['required', 'min:3']
         ]);
-
-        $category = Category::find($category->id);
 
         $category->update([
             'name' => $request->name,
@@ -64,7 +61,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        Category::find($category->id)->delete();
+        $category->delete();
         return response()->json(['message' => 'Category deleted successfully']);
     }
 }
