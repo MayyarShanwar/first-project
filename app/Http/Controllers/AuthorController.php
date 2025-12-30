@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthorStoreRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use App\Http\Resources\AuthorResource;
 
 class AuthorController extends Controller
 {
@@ -14,7 +15,7 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = Author::with('posts')->get();
-        return response()->json(['messsage: ' => 'Done successfully', 'authors' => $authors]);
+        return response()->json(['messsage: ' => 'Done successfully', 'data' => AuthorResource::collection($authors)]);
     }
 
     /**
@@ -23,9 +24,9 @@ class AuthorController extends Controller
     public function store(AuthorStoreRequest $request)
     {
 
-        Author::create($request->all());
+        $author = Author::create($request->all());
 
-        return response()->json(['message: ' => 'author added successfully']);
+        return response()->json(['message: ' => 'author added successfully','data' => new AuthorResource($author)]);
     }
 
     /**
@@ -33,7 +34,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        return response()->json(['author' => $author]);
+        return response()->json(['data' => new AuthorResource($author)]);
     }
 
     /**
@@ -45,7 +46,7 @@ class AuthorController extends Controller
 
         $author->update($validated);
 
-        return response()->json(['message: ' => 'author updated successfully']);
+        return response()->json(['message: ' => 'author updated successfully','data' => new AuthorResource($author)]);
     }
 
     /**

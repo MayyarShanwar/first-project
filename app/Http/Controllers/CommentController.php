@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentStoreRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Resources\CommentResource;
+
 
 class CommentController extends Controller
 {
@@ -14,7 +16,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::all();
-        return response()->json(['messsage: ' => 'Done successfully', 'comments' => $comments]);
+        return response()->json(['messsage: ' => 'Done successfully', 'data' => CommentResource::collection($comments)]);
     }
 
     /**
@@ -22,9 +24,9 @@ class CommentController extends Controller
      */
     public function store(CommentStoreRequest $request)
     {
-        Comment::create($request->all());
+        $comment = Comment::create($request->all());
 
-        return response()->json(['message: ' => 'comment added successfully']);
+        return response()->json(['message: ' => 'comment added successfully','data' => new CommentResource($comment)]);
     }
 
     /**
@@ -32,7 +34,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        return response()->json(['comment' => $comment]);
+        return response()->json(['data' => new CommentResource($comment)]);
     }
 
     /**
@@ -44,7 +46,7 @@ class CommentController extends Controller
 
         $comment->update($validated);
 
-        return response()->json(['message: ' => 'comment updated successfully']);
+        return response()->json(['message: ' => 'comment updated successfully','data' => new CommentResource($comment)]);
     }
 
     /**

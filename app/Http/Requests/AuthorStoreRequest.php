@@ -22,8 +22,8 @@ class AuthorStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3',
-            'email' => 'required|email'
+            'name' => 'required|string|min:3',
+            'email' => 'required|string|email'
         ];
     }
 }

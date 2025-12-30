@@ -6,6 +6,8 @@ use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Laravel\Prompts\Output\ConsoleOutput;
+use App\Http\Resources\CategoryResource;
+
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('posts')->get();
-        return response()->json(['messsage: ' => 'Done successfully', 'categories' => $categories]);
+        return response()->json(['messsage: ' => 'Done successfully', 'data' => CategoryResource::collection($categories)]);
     }
 
     /**
@@ -24,9 +26,9 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request)
     {
 
-        Category::create($request->all());
+        $category = Category::create($request->all());
 
-        return response()->json(['message: ' => 'category added successfully']);
+        return response()->json(['message: ' => 'category added successfully', 'data' => new CategoryResource($category)]);
 
     }
 
@@ -35,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response()->json(['category' => $category]);
+        return response()->json(['data' => new CategoryResource($category)]);
     }
 
     /**
@@ -47,7 +49,7 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return response()->json(['message: ' => 'category updated successfully']);
+        return response()->json(['message: ' => 'category updated successfully','data' => new CategoryResource($category)]);
     }
 
     /**
